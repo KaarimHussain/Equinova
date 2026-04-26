@@ -1,36 +1,102 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Equinova
+
+**The Intelligent Business Platform for Professional Equestrian Facilities**
+
+A marketing landing page built with Next.js 16, Tailwind CSS v4, Shadcn/UI, and Framer Motion. Designed to convert visitors into waitlist signups for Equinova — an AI-powered horse facility management SaaS.
+
+---
+
+## Tech Stack
+
+- **Framework:** Next.js 16 (App Router, static export)
+- **Styling:** Tailwind CSS v4 + CSS custom properties (OKLCH color system)
+- **UI Components:** Shadcn/UI (New York style)
+- **Animations:** Framer Motion + `react-intersection-observer`
+- **Icons:** Lucide React
+- **Fonts:** Inter + Roboto (via `next/font`)
+- **Type:** TypeScript
+
+---
 
 ## Getting Started
 
-First, run the development server:
-
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Project Structure
 
-## Learn More
+```
+equinova/
+├── app/
+│   ├── globals.css         # Tailwind + CSS token system (OKLCH)
+│   ├── layout.tsx          # Root layout with Navbar + Footer
+│   └── page.tsx            # Home page — assembles all sections
+├── components/
+│   ├── base/               # Shared layout components
+│   │   ├── navbar.tsx
+│   │   ├── footer.tsx
+│   │   ├── banner.tsx
+│   │   ├── faqs.tsx
+│   │   ├── equinova-pricing.tsx
+│   │   ├── join-the-waitlist.tsx
+│   │   └── ready-to-join.tsx
+│   ├── home/               # Page-specific sections (in render order)
+│   │   ├── HomeWrapper.tsx
+│   │   ├── Hero.tsx
+│   │   ├── About.tsx
+│   │   ├── WhatYouAreDoingWrong.tsx
+│   │   ├── ButYourStill.tsx
+│   │   ├── EquinovaSolution.tsx
+│   │   ├── TransformYourOperation.tsx
+│   │   ├── ButThatsNotAll.tsx
+│   │   ├── WhyEquinovaVsEverything.tsx
+│   │   ├── CompetitorsTools.tsx
+│   │   ├── JoinTheEquinova.tsx
+│   │   ├── NotReadyToCommit.tsx
+│   │   └── ReadyToJoin.tsx (via base/)
+│   └── ui/                 # Shadcn primitives
+│       ├── avatar.tsx
+│       ├── button.tsx
+│       ├── separator.tsx
+│       └── navigation-menu.tsx
+├── public/
+│   └── assets/             # Images, SVGs
+└── lib/
+    └── utils.ts            # cn() helper
+```
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Build
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+npm run build
+```
 
-## Deploy on Vercel
+Output goes to `out/` (static export — configured in `next.config.ts`).
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+> **Note:** Images are unoptimized due to static export mode. If you switch to a Node.js server deployment, remove `output: "export"` and `images: { unoptimized: true }` from `next.config.ts` to get `next/image` optimization back.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+## Theme
+
+Colors use OKLCH via Tailwind v4's CSS variable system. Light mode is active by default — dark mode variables are defined in `.dark` class but not auto-applied (see the commented-out `prefers-color-scheme` block in `globals.css`).
+
+Primary color: `oklch(0.5991 0.2429 359.9961)` — a deep red/crimson.
+
+---
+
+## Scripts
+
+| Command | Description |
+|---------|-------------|
+| `npm run dev` | Dev server at localhost:3000 |
+| `npm run build` | Static export build |
+| `npm run lint` | ESLint (Next.js + TypeScript rules) |
